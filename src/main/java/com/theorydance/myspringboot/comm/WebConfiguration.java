@@ -27,8 +27,19 @@ public class WebConfiguration {
 		registration.addUrlPatterns("/*");
 		registration.setName("MyFilter2");
 		// oder的值设置的越低，越优先执行
-		registration.setOrder(1);
+		registration.setOrder(2);
 		return registration;
 	}
+	
+//	@Bean
+//	public FilterRegistrationBean<Filter> testUsernamePasswordAuthenticationFilter(){
+//		FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>();
+//		registration.setFilter(new UsernamePasswordAuthenticationFilter());
+//		registration.addUrlPatterns("/*");
+//		registration.setName("MyUsernamePasswordAuthenticationFilter");
+//		// oder的值设置的越低，越优先执行
+//		registration.setOrder(1);
+//		return registration;
+//	}
 	
 }

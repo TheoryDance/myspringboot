@@ -1,4 +1,5 @@
 # application.properties中的配置会覆盖application.yml中的配置
+debug: true
 neo:
   title: 纯洁的微笑
   description: 分享技术，品味生活

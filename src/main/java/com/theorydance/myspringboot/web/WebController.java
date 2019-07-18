@@ -54,10 +54,14 @@ public class WebController {
 		return "admin";
 	}
 	
-//	@PreAuthorize("hasAuthority('admin:upd')")
+	@RequestMapping("/admin3")
+	@PreAuthorize("hasAuthority('admin:upd')")
+	public String admin3(){
+		return "admin";
+	}
+	@RequestMapping("/admin4")
 	@PreAuthorize("hasRole('ADMIN')")
-	@RequestMapping("/xxxx3")
-	public String xxxx3(){
+	public String admin4(){
 		return "admin";
 	}
 }
