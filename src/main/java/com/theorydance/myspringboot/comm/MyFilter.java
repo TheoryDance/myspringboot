@@ -22,7 +22,7 @@ public class MyFilter implements Filter{
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
-		System.out.println("this is MyFilter, url : " + request.getRequestURI());
+		System.out.println("requestURI : " + request.getRequestURI());
 		chain.doFilter(req, resp);
 	}
 

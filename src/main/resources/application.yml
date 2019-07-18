@@ -11,3 +11,8 @@ spring:
   thymeleaf:
     # 关闭Thymeleaf的缓存，不然在开发过程中修改页面不会立刻生效，需要重启，生产环境配置为true 
     cache: false
+  
+  security:
+    user:
+      name: admin # 默认为user
+      password: admin123 # 默认随机生成，在控制台输出

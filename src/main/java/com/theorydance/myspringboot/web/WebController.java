@@ -1,71 +1,63 @@
 package com.theorydance.myspringboot.web;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
+import java.util.Map;
 
-import javax.validation.Valid;
-
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.theorydance.myspringboot.model.User;
-
-@RestController
+@Controller
 public class WebController {
-
-	// @Valid表示该参数使用了参数校验，BindingResult参数校验的结果会存储在此对象中
-	// @Valid属于Hibernate Validator
-	@RequestMapping("/saveUser")
-	public void saveUser(@Valid User user,BindingResult result) {
-		System.out.println("user:" + user);
-		if(result.hasErrors()) {
-			List<ObjectError> list = result.getAllErrors();
-			for (ObjectError error : list) {
-				System.out.println(error.getCode()+"-"+error.getDefaultMessage());
-				
-			}
-		}
+	
+	// 不引入thymeleaf的时候，可以访问该路径，对应的的视图/WEB-INF/jsp/welcome.jsp
+	// 引入thymeleaf后，访问路径变为了classpath:/templates/welcome.html
+	@GetMapping("/welcomeJSP")
+	public String welcomeJSP(Map<String,Object> model){
+		model.put("time", new Date());
+		model.put("message", "hello, world!");
+		System.out.println("this is welcome()");
+		return "welcome";
 	}
 	
-	@RequestMapping(name="/getUser",value="/getUser",method=RequestMethod.POST)
-	public User getUser() {
-		User user = new User();
-		user.setName("小明");
-		user.setAge(12);
-		user.setPass("123456");
-		return user;
+	@RequestMapping("/thymeleafPage")
+	public String thymeleafPage(ModelMap map){
+		map.addAttribute("message", "http://www.ityouknow.com");
+		return "thymeleafPage";
 	}
 	
-	@RequestMapping(name="/getUser2",value="/getUser2",method=RequestMethod.POST)
-	public User getUser2(User user) {
-		return user;
+	@RequestMapping("/login")
+	public String login(ModelMap map){
+		return "login";
 	}
 	
-	@RequestMapping(value="/getName/{name}",method=RequestMethod.POST)
-	public String getUser3(@PathVariable String name) {
-		return name;
+	@RequestMapping("/content")
+	public String content(){
+		return "content";
 	}
 	
-	
-	@RequestMapping(name="/getUsers",value="/getUsers",method= {RequestMethod.POST,RequestMethod.GET})
-	public List<User> getUsers() {
-		List<User> list = new ArrayList<>();
-		User user = new User();
-		user.setName("小明");
-		user.setAge(12);
-		user.setPass("123456");
-		list.add(user);
-		
-		user = new User();
-		user.setName("ranfs");
-		user.setAge(100);
-		user.setPass("123456");
-		list.add(user);
-		return list;
+	@RequestMapping({"/index","/"})
+	public String index(){
+		return "index";
 	}
 	
+	@RequestMapping("/admin")
+	public String admin(){
+		return "admin";
+	}
+	
+	@RequestMapping("/admin2")
+	public String admin2(){
+		return "admin";
+	}
+	
+//	@PreAuthorize("hasAuthority('admin:upd')")
+	@PreAuthorize("hasRole('ADMIN')")
+	@RequestMapping("/xxxx3")
+	public String xxxx3(){
+		return "admin";
+	}
 }
