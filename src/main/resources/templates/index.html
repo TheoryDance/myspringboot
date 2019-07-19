@@ -3,13 +3,24 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>index</title>
+	<script type="text/javascript" src="/static/jquery.min.js"></script>
 </head>
-<body>
+<body th:inline="javascript">
 <h1>大家都可以访问的页面</h1>
 <p>点击 <a th:href="@{/content}">这里</a>进图content页面</p>
 <p>点击 <a th:href="@{/admin}">这里</a>进图admin页面</p>
 <p>点击 <a th:href="@{/admin2}">这里</a>进图admin页面(admin2->admin.html)</p>
 <p>点击 <a th:href="@{/admin3}">这里</a>进图admin页面(admin3->admin.html)</p>
 <p>点击 <a th:href="@{/admin4}">这里</a>进图admin页面(admin4->admin.html)</p>
+<p>点击 <a href="/admin2">这里</a>进图admin页面(admin2->admin.html，没使用thymeleaf标记)</p>
+<p>点击 <a href="javascript:void(0);" onclick="myclick()">这里</a>获取用户的基本信息</p>
+<script type="text/javascript" th:inline="javascript">
+function myclick(){
+	// 获取
+	$.get("/getMyLoginInfo",{},function(result){
+		console.log(result);
+	},"json");
+}
+</script>
 </body>
 </html>

@@ -17,13 +17,13 @@ public class MyUsernamePasswordAuthenticationProvider implements AuthenticationP
 		System.out.println(authentication.getClass().getName());
 		System.out.println(authentication);
 		System.out.println(authentication.getName());
-		System.out.println(authentication.getPrincipal());
-		System.out.println(authentication.getCredentials());
 		
 		MyUsernamePasswordAuthenticationToken token = new MyUsernamePasswordAuthenticationToken(null, (String)authentication.getPrincipal(), (String)authentication.getCredentials());
 		String username = token.getUsername();
 		String password = token.getPassword();
-		System.out.println(username + "-" +password);
+		System.out.println("-------->"+authentication.getPrincipal());
+		System.out.println("-------->"+authentication.getCredentials());
+		System.out.println("-------->"+username + "-" +password);
 		List<GrantedAuthorityImpl> authorities = new ArrayList<>();
 		authorities.add(new GrantedAuthorityImpl("user:add"));
 		authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
@@ -32,6 +32,7 @@ public class MyUsernamePasswordAuthenticationProvider implements AuthenticationP
 	    // 2. 放入的是权限时，不能加ROLE_前缀，hasAuthority与放入的权限名称对应即可
 		
 		token = new MyUsernamePasswordAuthenticationToken(authorities, token);
+		token.setAuthenticated(true);
 		SecurityContextHolder.getContext().setAuthentication(token);
 		return token;
 	}

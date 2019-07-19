@@ -3,9 +3,15 @@ debug: true
 neo:
   title: 纯洁的微笑
   description: 分享技术，品味生活
-  
+
+server:
+  servlet:
+    session:
+      timeout: 60
+
 spring:
   mvc:
+    static-path-pattern: /static/**
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp

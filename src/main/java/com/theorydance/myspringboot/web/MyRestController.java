@@ -3,8 +3,11 @@ package com.theorydance.myspringboot.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -73,5 +76,13 @@ public class MyRestController {
 		user.setPass("123456");
 		list.add(user);
 		return list;
+	}
+	
+	
+	@RequestMapping(value="/getMyLoginInfo",method={RequestMethod.POST,RequestMethod.GET})
+	public Object getMyLoginInfo(HttpServletRequest request) {
+		System.out.println(request.getSession().getId());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return auth;
 	}
 }
