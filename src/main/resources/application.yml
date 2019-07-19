@@ -9,6 +9,10 @@ server:
     session:
       timeout: 60
 
+logging:
+  path: logs
+  fiile: mylog.log
+
 spring:
   mvc:
     static-path-pattern: /static/**
