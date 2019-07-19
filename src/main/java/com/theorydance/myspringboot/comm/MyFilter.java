@@ -13,10 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MyFilter implements Filter{
 
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
-		
-	}
+	public void init(FilterConfig filterConfig) throws ServletException {}
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
@@ -27,9 +24,6 @@ public class MyFilter implements Filter{
 	}
 
 	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void destroy() {}
 
 }

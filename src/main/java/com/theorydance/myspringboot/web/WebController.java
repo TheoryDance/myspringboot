@@ -3,7 +3,6 @@ package com.theorydance.myspringboot.web;
 import java.util.Date;
 import java.util.Map;
 
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

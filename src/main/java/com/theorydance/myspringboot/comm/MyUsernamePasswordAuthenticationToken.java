@@ -29,14 +29,12 @@ public class MyUsernamePasswordAuthenticationToken extends AbstractAuthenticatio
 	
 	@Override
 	public Object getCredentials() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.password;
 	}
 
 	@Override
 	public Object getPrincipal() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.username;
 	}
 
 }
