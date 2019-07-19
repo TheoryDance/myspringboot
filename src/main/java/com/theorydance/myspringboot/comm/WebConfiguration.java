@@ -15,7 +15,7 @@ public class WebConfiguration {
 		registration.setFilter(new MyFilter());
 		registration.addUrlPatterns("/*");
 		registration.setName("MyFilter");
-		// oder的值设置的越低，越优先执行
+		// order的值设置的越低，越优先执行
 		registration.setOrder(6);
 		return registration;
 	}
@@ -26,7 +26,7 @@ public class WebConfiguration {
 		registration.setFilter(new MyFilter2());
 		registration.addUrlPatterns("/*");
 		registration.setName("MyFilter2");
-		// oder的值设置的越低，越优先执行
+		// order的值设置的越低，越优先执行
 		registration.setOrder(2);
 		return registration;
 	}

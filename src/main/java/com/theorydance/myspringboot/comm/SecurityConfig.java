@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
+// 说明：prePostEnabled默认为false，不开启的话，在方法上的@PreAuthorize无效
 @EnableGlobalMethodSecurity(securedEnabled=true,prePostEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
