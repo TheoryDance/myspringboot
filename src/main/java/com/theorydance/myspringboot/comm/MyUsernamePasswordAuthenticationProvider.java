@@ -18,13 +18,13 @@ public class MyUsernamePasswordAuthenticationProvider implements AuthenticationP
 		System.out.println(authentication);
 		System.out.println(authentication.getName());
 		
-		try{
-			MyUsernamePasswordAuthenticationToken my = (MyUsernamePasswordAuthenticationToken)authentication;
-			System.out.println("*****************************************************************");
-			System.out.println(my);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try{
+//			MyUsernamePasswordAuthenticationToken my = (MyUsernamePasswordAuthenticationToken)authentication;
+//			System.out.println("*****************************************************************");
+//			System.out.println(my);
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
 		MyUsernamePasswordAuthenticationToken token = new MyUsernamePasswordAuthenticationToken(null, (String)authentication.getPrincipal(), (String)authentication.getCredentials());
 		String username = token.getUsername();

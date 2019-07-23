@@ -21,8 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Resource
 	private MyUsernamePasswordAuthenticationProvider authenticationProvider;
-	@Autowired
-	private AuthenticationManager authenticationManager;
+//	@Autowired
+//	private AuthenticationManager authenticationManager;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 			.csrf().ignoringAntMatchers("/logout")
 			.disable();
-		http.addFilterAt(myAuthFilter(), UsernamePasswordAuthenticationFilter.class);
+		// http.addFilterAt(myAuthFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Override
@@ -46,16 +46,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.authenticationProvider(authenticationProvider);
 	}
 	
-	@Bean
-	public AuthenticationManager authenticationManager() throws Exception{
-		return super.authenticationManagerBean();
-	}
-	
 //	@Bean
-	public MyUsernamePasswordAuthenticationFilter myAuthFilter(){
-		MyUsernamePasswordAuthenticationFilter myf = new MyUsernamePasswordAuthenticationFilter();
-		myf.setAuthenticationManager(authenticationManager);
-		return myf;
-	}
+//	public AuthenticationManager authenticationManager() throws Exception{
+//		return super.authenticationManagerBean();
+//	}
+	
+//	public MyUsernamePasswordAuthenticationFilter myAuthFilter(){
+//		MyUsernamePasswordAuthenticationFilter myf = new MyUsernamePasswordAuthenticationFilter();
+//		myf.setAuthenticationManager(authenticationManager);
+//		return myf;
+//	}
 	
 }
