@@ -5,6 +5,7 @@ neo:
   description: 分享技术，品味生活
 
 server:
+  port: 8082
   servlet:
     session:
       timeout: 60
@@ -12,6 +13,9 @@ server:
 logging:
   path: logs
   fiile: mylog.log
+
+logsbyproduce:
+  dir: /opt/tempbyranfs/logsdir
 
 spring:
   mvc:
