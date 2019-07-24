@@ -12,14 +12,14 @@ server:
 
 logging:
   path: logs
-  file: mylog.log
+  # file: mylog.log # 说明file与path都配置后，只有一个生效
 
 logsbyproduce:
   dir: D:/tmp/logs/p1app_v2
   index: logsbyp1app_v2
   type: p1app_v2
   pool:
-    size: 4
+    size: 6
 
 spring:
   mvc:
