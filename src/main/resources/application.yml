@@ -12,10 +12,14 @@ server:
 
 logging:
   path: logs
-  fiile: mylog.log
+  file: mylog.log
 
 logsbyproduce:
-  dir: /opt/tempbyranfs/logsdir
+  dir: D:/tmp/logs/p1app_v2
+  index: logsbyp1app_v2
+  type: p1app_v2
+  pool:
+    size: 4
 
 spring:
   mvc:

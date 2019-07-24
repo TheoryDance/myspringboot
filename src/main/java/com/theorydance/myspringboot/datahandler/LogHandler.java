@@ -13,18 +13,26 @@ import java.util.regex.Pattern;
 
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import com.theorydance.myspringboot.utils.EsUtils;
 
-@Component
-public class P1upgradeLogHandler {
-	
-	@Value("${logsbyproduce.dir}")
-	private String logsDir;
+import lombok.extern.log4j.Log4j2;
 
-	public void uploadLogsToES() throws Exception{
+@Log4j2
+public class LogHandler extends Thread{
+	
+	private File file;
+	private String index;
+	private String type;
+	
+	public LogHandler(File file, String index, String type) {
+		this.file = file;
+		this.index = index;
+		this.type = type;
+	}
+	
+	@Override
+	public void run() {
 		// pattern=%h,%l,%u,%t,%T,"%r",%s,%b,%{Referer}i,"%{User-Agent}i",%{X-Requested-With}i,%{passport}c
     	/*
     	 * %h 远程主机名
@@ -36,13 +44,7 @@ public class P1upgradeLogHandler {
     	 * %s 响应的HTTP状态代码
     	 * %b 发送的字节数，不含http头， 如果为'-'表示没发送字节
     	 */
-		File dir = new File(logsDir);
-		if(!dir.isDirectory()) {
-			return;
-		}
-		File[] files = dir.listFiles();
-		for (File file : files) {
-		  try {
+		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
 			String line = null;
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);
@@ -76,11 +78,11 @@ public class P1upgradeLogHandler {
 						map.put("X-Requested-With", m.group(11));
 						map.put("passport", m.group(12));
 						IndexResponse response = client
-								.prepareIndex("logsbyproduce", "p1upgrade")
+								.prepareIndex(this.index, this.type)
 								.setSource(map).get();
-						System.out.println(response);
+						log.info(response);
 					}else {
-						System.out.println("lineNum="+lineNum+",is not parse");
+						log.error("lineNum="+lineNum+",is not parse");
 					}
 				}catch (Exception e) {
 					e.printStackTrace();
@@ -91,7 +93,6 @@ public class P1upgradeLogHandler {
 		  }catch (Exception e) {
 			e.printStackTrace();
 		  }
-		}
 	}
 	
 }
