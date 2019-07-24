@@ -59,7 +59,6 @@ public class LogHandler extends Thread{
 					boolean flag = m.matches();
 					if(flag) {
 						Map<String,Object> map = new HashMap<>();
-						map.put("flag", flag);
 						map.put("host", m.group(1));
 						map.put("unkown", m.group(2));
 						map.put("identify", m.group(3));
