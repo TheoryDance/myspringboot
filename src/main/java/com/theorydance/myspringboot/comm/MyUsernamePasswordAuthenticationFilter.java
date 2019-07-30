@@ -28,6 +28,7 @@ AbstractAuthenticationProcessingFilter{
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException, IOException, ServletException {
+		System.out.println("进入MyUsernamePasswordAuthenticationFilter.attemptAuthentication()");
 		if (!request.getMethod().equals("POST")) {
 			throw new AuthenticationServiceException(
 					"Authentication method not supported: " + request.getMethod());
