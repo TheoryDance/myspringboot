@@ -2,10 +2,7 @@ package com.theorydance.myspringboot.comm;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,8 +18,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Resource
 	private MyUsernamePasswordAuthenticationProvider authenticationProvider;
-//	@Autowired
-//	private AuthenticationManager authenticationManager;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -38,23 +33,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 			.csrf().ignoringAntMatchers("/logout")
 			.disable();
-		// http.addFilterAt(myAuthFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.addFilterAt(new MyUsernamePasswordAuthenticationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(authenticationProvider);
 	}
-	
-//	@Bean
-//	public AuthenticationManager authenticationManager() throws Exception{
-//		return super.authenticationManagerBean();
-//	}
-	
-//	public MyUsernamePasswordAuthenticationFilter myAuthFilter(){
-//		MyUsernamePasswordAuthenticationFilter myf = new MyUsernamePasswordAuthenticationFilter();
-//		myf.setAuthenticationManager(authenticationManager);
-//		return myf;
-//	}
 	
 }
