@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<base href="/myspringboot/">
+<title>Lucene Demo By TheoryDance</title>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<style type="text/css">
+#input{width: 400px;height:25px; line-height: 25px;}
+#search{display:block;width: 50px;line-height: 25px;}
+</style>
+</head>
+<body>
+	<div>
+		<div style="overflow: hidden;">
+			<div style="float:left;"><input id="input" value="GkzMapper"/></div>
+			<div style="float:left;"><button id="search">查询</button></div>
+		</div>
+		<div id="content"></div>
+	</div>
+</body>
+<script type="text/javascript" src="static/api.js"></script>
+<script type="text/javascript">
+$(function(){
+	// 在js中进行url的编码与解码
+	// var str  = encodeURIComponent('中文'); // 中文以及一些符号的编码
+	// var str  = decodeURIComponent(UrlEncode);
+	$("#search").click(function(){
+		$("#content").empty();
+		$.post(api.lucene_search,{'condition': $("#input").val()},function(data){
+			for(var i=0;i<data.length;i++){
+				$("#content").append("<a href='lucene/detail?"+data[i].docId+"' target='_blank'>("+i+")"+data[i].path+"</a><br/>");
+			}
+		},'json');
+	});
+});
+</script>
+</html>
