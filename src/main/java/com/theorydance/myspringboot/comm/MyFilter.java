@@ -19,7 +19,7 @@ public class MyFilter implements Filter{
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
-		System.out.println("requestURI : " + request.getRequestURI());
+		System.out.println("requestURI : " + request.getRequestURI() + ", Method : " + request.getMethod());
 		chain.doFilter(req, resp);
 	}
 
