@@ -34,7 +34,7 @@ public class MyUsernamePasswordAuthenticationProvider implements AuthenticationP
 		System.out.println("-------->"+username + "-" +password);
 		List<GrantedAuthorityImpl> authorities = new ArrayList<>();
 		authorities.add(new GrantedAuthorityImpl("user:add"));
-		authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+		authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN")); // 也可以使用SimpleGrantedAuthority来替换GrantedAuthorityImpl
 		// List<GrantedAuthority> list = AuthorityUtils.commaSeparatedStringToAuthorityList("admin:upd,ROLE_ADMIN");//设置权限和角色
 	    // 1. commaSeparatedStringToAuthorityList放入角色时需要加前缀ROLE_，而在controller使用时不需要加ROLE_前缀
 	    // 2. 放入的是权限时，不能加ROLE_前缀，hasAuthority与放入的权限名称对应即可
